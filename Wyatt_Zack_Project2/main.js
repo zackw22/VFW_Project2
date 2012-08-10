@@ -68,6 +68,16 @@ window.addEventListener("DOMContentLoaded", function(){
                     
         }
     }
+    
+    function clearLocal(){
+        if (local.storage.length === 0){
+            alert("There is no tasks to clear.")
+        }else{
+            localStorage.clear();
+            alert("All tasks have been cleared.")
+        }
+    }
+    
     function storeData(){
         var id           =Math.floor(Math.random()*1000001)
         getSelectedradio();
@@ -121,13 +131,13 @@ window.addEventListener("DOMContentLoaded", function(){
         
     
     //Link and Submit Click Events
-/*
+
     var viewTask= $("viewTask");
         viewTask.addEventListener("click", getData);
     var clearItem= $("editItem");
         clearItem.addEventListener("click", clearLocal);
     var save= $("submit");
         addtask.addEventListener("click", storeData);
-*/
+
 
 });
