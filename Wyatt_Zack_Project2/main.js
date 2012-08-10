@@ -74,7 +74,9 @@ window.addEventListener("DOMContentLoaded", function(){
             alert("There is no tasks to clear.")
         }else{
             localStorage.clear();
-            alert("All tasks have been cleared.")
+            alert("All tasks have been cleared.");
+            window.location.reload();
+            return false;
         }
     }
     
