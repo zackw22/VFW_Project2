@@ -19,13 +19,13 @@ window.addEventListener("DOMContentLoaded", function(){
     //Create select field
 
     function makeTask(){
-        var formtag= document.getElementsByTagName("form"),
+        var formTag= document.getElementsByTagName("form"),
             selectLi= $("select"),
             makeSelect= document.createElement("select");
-            makeSelect.setAttribute("id", "groups");
-        for(var i=0, j=taskType.length; i>j; i++){
+            makeSelect.setAttribute("id", "taskForm");
+        for(var i=0, j=taskType.length; i<j; i++){
             var makeOption= document.createElement("option");
-            var optText= taskType(i);
+            var optText= taskType[i];
                 makeOption.setAttribute("value", optText);
                 makeOption.innerHTML= optText;
                 makeSelect.appendChild(makeOption);
@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", function(){
         var item         ={};
             item.task        =["Task:", $("task").value];
             item.tdate       =["Date:", $("tdate").value];
-            item.tname       =["Name:", $("tname").value];
+            item.tname       =["Assign Task:", $("tname").value];
             item.ttype       =["Type:", $("ttype").value];
             item.tcomments   =["Comments:", $("tcomments").value];
             item.trating     =["Rating:", $("trating").value];
@@ -90,17 +90,18 @@ window.addEventListener("DOMContentLoaded", function(){
 
     //Variable
 
-    var taskType= ("--Choose a task--","study","homework","test","clean","errand","walk the dog","project","other"),
-        topicValue
+    var taskType= ("--Choose a task--","study","homework","test","clean","errand","walk the dog","project","other");
         makeTask();
+        topicValue
+        
     
     //Link and Submit Click Events
 
     var viewTask= $("viewTask");
-        viewTask.addEventListener("click", getTask);
-    var editItem= $("editItem");
-        editItem.addEventListener("click", editTask);
-    var addTask= $("submit");
+        viewTask.addEventListener("click", getData);
+    var clearItem= $("editItem");
+        clearItem.addEventListener("click", clearLocal);
+    var save= $("submit");
         addtask.addEventListener("click", storeData);
 
 

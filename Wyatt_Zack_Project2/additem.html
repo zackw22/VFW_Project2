@@ -12,7 +12,6 @@
             <meta type="charset" content = "utf-8" />
             <meta type="robots" content="index,follow" />
             <meta type="viewport" content="user-scalable=no, width=device-width" />
-            <meta name="viewport" content="target-densitydpi=device-dpi" />
             <meta name="HandheldFriendly" content="True">
             <meta name="MobileOptimized" content="320" />
             <meta type="description" content="Add a task for you or a loved one" />
@@ -24,8 +23,8 @@
             <h2>Add a Task</h2>
         </header>
         <article>
-                <form action="additem.html" method="post" id="taskForm">
-                    <fieldset>
+                <form action="#" method="post" id="taskForm">
+                    <fieldset id= "taskFieldset"</fieldset>
                         <legend>Add Your TO DO here</legend>
                         <div class= "taskField">
                             <ul>
@@ -37,9 +36,8 @@
                                 </li>
                                 <li><label for="tdate">Date: </label> <input type="date" id="tdate" placeholder="day/month/year" /></li>
                                 <li><label for="tname">Assign Task </label> <input type="text" id="tname" /></li>
-                                <li><label for="ttype" id="ttype">Task Type:</label>
-                           
-                                <select id="task" />
+                               
+                                <li id= "select"><label for="task">Task Type:</label></li>
                                     <optgroup label="--Choose a task--">
                                         <option value="study">study</option>
                                         <option value="homework">homework</option>
@@ -63,7 +61,7 @@
         <section>
             <nav>
                 <ul id="numlist">
-                    <li><a href="additem.html" id= "editItem">Edit A Task</a></li>
+                    <li><a href="additem.html" id= "clearItem">Clear A Task</a></li>
                     <li><a href="#" id= "viewTask">View All Tasks</a></li>
                  </ul>
             </nav>
