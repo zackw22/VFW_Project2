@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", function(){
     
     function clearLocal(){
         if (local.storage.length === 0){
-            alert("There is no tasks to clear.")
+            alert("There is no tasks to clear.");
         }else{
             localStorage.clear();
             alert("All tasks have been cleared.");
