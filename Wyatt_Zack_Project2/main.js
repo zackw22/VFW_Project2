@@ -7,7 +7,7 @@
 //Waiting for DOM
 
 window.addEventListener("DOMContentLoaded", function(){
-    alert(localStorage.value(0));    
+        
     
     //Get Element byID function
     function $(x){  
@@ -46,11 +46,33 @@ window.addEventListener("DOMContentLoaded", function(){
         }
     }
     
+    function toggleControls(n){
+        switch(n){
+                case "on":
+                    $("taskForm").style.display= "none";
+                    $("clearItem").style.display="inline";
+                    $("viewTask").style.display= "none";
+                    $("submit").style.display= "inline";
+                    break;
+                case "off":
+                    $("taskForm").style.display= "block";
+                    $("clearItem").style.display="inline";
+                    $("viewTask").style.display= "inline";
+                    $("submit").style.display= "none";
+                    $("items").style.display= "none";
+                    
+                    break;
+                default:
+                    return false;
+                    
+                    
+        }
+    }
     function storeData(){
         var id           =Math.floor(Math.random()*1000001)
         getSelectedradio();
         var item         ={};
-            item.task        =["Task:", $("task").value];
+            item.task        =["Task:", $("taskForm").value];
             item.tdate       =["Date:", $("tdate").value];
             item.tname       =["Assign Task:", $("tname").value];
             item.ttype       =["Type:", $("ttype").value];
@@ -68,8 +90,11 @@ window.addEventListener("DOMContentLoaded", function(){
                 var makeDiv= document.createElement("div");
                 makeDiv.setAttribute("id","items");
                 var makeList= document.createElement("ul");
-                document.body.appendChild(makeDiv);
                 makeDiv.appendChild(makeList);
+                document.body.appendChild(makeDiv);
+                $("items").style.display= "display";
+                
+                
                 for(var i=0, len=localStorage.length; i<len; i++);
                     var makeLi= document.createElement("li");
                     makeList.appendChild(makeLi);
@@ -92,17 +117,17 @@ window.addEventListener("DOMContentLoaded", function(){
 
     var taskType= ("--Choose a task--","study","homework","test","clean","errand","walk the dog","project","other");
         makeTask();
-        topicValue
+        
         
     
     //Link and Submit Click Events
-
+/*
     var viewTask= $("viewTask");
         viewTask.addEventListener("click", getData);
     var clearItem= $("editItem");
         clearItem.addEventListener("click", clearLocal);
     var save= $("submit");
         addtask.addEventListener("click", storeData);
-
+*/
 
 });
