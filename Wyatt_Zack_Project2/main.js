@@ -1,145 +1,138 @@
-//Project 2
+//Project 2 Week 2
 //Visual Frameworks
 //Zack Wyatt
-//Mobile Development
 
 
-//Waiting for DOM
+//Wait until the DOM is ready
+window.addEventListener("DOMContentLoaded", function () {
 
-window.addEventListener("DOMContentLoaded", function(){
-        
-    
-    //Get Element byID function
-    function $(x){  
-        var theElement= document.getElementById(x)    
-        return theElement
+
+    //getElementById Function
+    function $(x) {
+    var theElement = document.getElementById(x);
+    return theElement;
     }
     
-
-    //Create select field
-
-    function makeTask(){
-        var formTag= document.getElementsByTagName("form"),
-            selectLi= $("select"),
-            makeSelect= document.createElement("select");
-            makeSelect.setAttribute("id", "taskForm");
-        for(var i=0, j=taskType.length; i<j; i++){
-            var makeOption= document.createElement("option");
-            var optText= taskType[i];
-                makeOption.setAttribute("value", optText);
-                makeOption.innerHTML= optText;
-                makeSelect.appendChild(makeOption);
-            
-        selectLi.appendChild(makeSelect);
+    //Create select field element and populate with options
+    function makeCats() {
+        var formTag = document.getElementsByTagName("form"), //formTag is an array
+            selectLi = $("select"),
+            makeSelect = document.createElement("select");
+            makeSelect.setAttribute("id", "workouts");
+        for (var i = 0, j = workoutType.length; i<j; i++) {
+            var makeOption = document.createElement("option");
+            var optText = workoutType [i];
+            makeOption.setAttribute("value", optText);
+            makeOption.innerHTML = optText;
+            makeSelect.appendChild(makeOption);
         }
-        
+        selectLi.appendChild(makeSelect);
     }
-    //Finding the value of selected radio button
-
-    function getSelectedradio(){
-        var radios= document.forms[0].topic
-        for (var i=0; 1<radios.length; i++){
-            if(radios[i].checked){
-                topicValue= radios(i).value;
-            
+    
+    //Find value of a selected radio button
+    function getSelectedRadio(){
+        var radios = document.forms[0].sex;
+        for (var i = 0; i<radios.length; i++) {
+            if(radios[i].checked){ 
+                sexValue = radios[i].value;
             }
         }
     }
-    
-    function toggleControls(n){
-        switch(n){
-                case "on":
-                    $("taskForm").style.display= "none";
-                    $("clearItem").style.display="inline";
-                    $("viewTask").style.display= "none";
-                    $("submit").style.display= "inline";
-                    break;
-                case "off":
-                    $("taskForm").style.display= "block";
-                    $("clearItem").style.display="inline";
-                    $("viewTask").style.display= "inline";
-                    $("submit").style.display= "none";
-                    $("items").style.display= "none";
-                    
-                    break;
-                default:
-                    return false;
-                    
-                    
-        }
-    }
-    
-    function clearLocal(){
-        if (local.storage.length === 0){
-            alert("There is no tasks to clear.");
-        }else{
-            localStorage.clear();
-            alert("All tasks have been cleared.");
-            window.location.reload();
-            return false;
+    function toggleControls (n) {
+        switch(n) {
+            case "on":
+                $("workForm").style.display = "none";
+                $("clear").style.display = "inline";
+                $("view").style.display = "none";
+                $("addNew").style.display = "inline";
+                break;
+            case "off":
+                $("workForm").style.display = "block";
+                $("clear").style.display = "inline";
+                $("view").style.display = "inline";
+                $("addNew").style.display = "none";
+                $("items").syle.display = "none";
+                break;
+            default:
+                return false;
+            
         }
     }
     
     function storeData(){
-        var id           =Math.floor(Math.random()*1000001)
-        getSelectedradio();
-        var item         ={};
-            item.task        =["Task:", $("taskForm").value];
-            item.tdate       =["Date:", $("tdate").value];
-            item.tname       =["Assign Task:", $("tname").value];
-            item.ttype       =["Type:", $("ttype").value];
-            item.tcomments   =["Comments:", $("tcomments").value];
-            item.trating     =["Rating:", $("trating").value];
-            item.ttopic      =["Task Topic:",topicValue];
-
-        //Saved Data
-
-        localStorage.setItem(id, JSON.stringify(item));
-        alert("Your task has been added!");
+        var id                  = Math.floor(Math.random()*1000001);
+        //Gather up all our form field values and store in an object
+        //Object properties contain array with the form label and input value.
+        getSelectedRadio();
+        var item                = {};
+            item.date           = ["Date:", $("date").value ];
+            item.name           = ["Name:", $("name").value];
+            item.currentWeight  = ["Current Weight:", $("currentWeight").value];
+            item.sex            = ["Sex:", sexValue];
+            item.workoutType    = ["Type of Workout:", $("select").value];
+            item.reps           = ["Reps:", $("reps").value];
+            item.comments       = ["Comments:", $("comments").value];
+            //Save data into Local Storage: Use stringify to convert our object to a string
+            localStorage.setItem(id, JSON.stringify(item) );
+            alert("Workout has been added!");
+            
     }
-
-        function getData(){
-                var makeDiv= document.createElement("div");
-                makeDiv.setAttribute("id","items");
-                var makeList= document.createElement("ul");
-                makeDiv.appendChild(makeList);
-                document.body.appendChild(makeDiv);
-                $("items").style.display= "display";
-                
-                
-                for(var i=0, len=localStorage.length; i<len; i++);
-                    var makeLi= document.createElement("li");
-                    makeList.appendChild(makeLi);
-                    var key= localStorage.key(i);
-                    var value= localStorage.getItem(key);
-                    var obj= JSON.parse(value);
-                    var subList= document.createElement("ul");
-                    makeLi.appendChild(makeSubList);
-                    for(var n in obj){
-                        var makeSubli= document.createElement("li");
-                        makeSubList.appendChild(makeSubli);
-                        var optSubText= obj[n][0]+" "+obj[n][1];
-                        makeSubli.innerHTML=optSubText;
-                        
-                    }
-                
+    function getData(){
+        toggleControls("on");
+        if(localStorage.length === 0){
+            alert("There is no date in local storage!");
         }
+        //Write Data from Local Storage to the Browser.
+        var makeDiv = document.createElement("div");
+        makeDiv.setAttribute("id", "items");
+        var makeList = document.createElement("ul");
+        makeDiv.appendChild(makeList);
+        document.body.appendChild(makeDiv);
+        $("items").style.display = "block";
+        for(var i = 0, len = localStorage.length; i<len; i++) {
+            var makeLi = document.createElement("li");
+            makeList.appendChild(makeLi);
+            var key = localStorage.key(i);
+            var value = localStorage.getItem(key);
+            //Convert the string from local storage value back to an object
+            var obj = JSON.parse(value);
+            var makeSubList = document.createElement("ul");
+            makeLi.appendChild(makeSubList);        
+            for(var n in obj){
+                var makeSubli = document.createElement("li");
+                makeSubList.appendChild(makeSubli);
+                var optSubText = obj[n][0]+ "" +obj[n][1];
+                makeSubli.innerHTML=optSubText;
+                
 
-    //Variable
-
-    var taskType= ("--Choose a task--","study","homework","test","clean","errand","walk the dog","project","other");
-        makeTask();
-        
-        
+            }
+        }
+    }
     
-    //Link and Submit Click Events
-
-    var viewTask= $("viewTask");
-        viewTask.addEventListener("click", getData);
-    var clearItem= $("editItem");
-        clearItem.addEventListener("click", clearLocal);
+    function clearLocal() {
+        if(localStorage.length === 0) {
+            alert("There is no date to clear.")
+        }else{
+            localStorage.clear();
+            alert("Workouts have been cleared!");
+            window.location.reload();
+            return false;
+        }
+    }
+    //Variable defaults
+    var workoutType = ["--Choose a workout--", "arms", "back", "legs", "cardio"],
+        sexValue;
+    makeCats();
+    
+    //Set Link and Submit Click Events
+    var displayLink = $("view");
+    displayLink.addEventListener("click", getData);
+    var clearLink = $("clear");
+    clearLink.addEventListener("click", clearLocal);
     var save= $("submit");
-        addtask.addEventListener("click", storeData);
+    save.addEventListener("click", storeData);
+    
 
 
 });
+
