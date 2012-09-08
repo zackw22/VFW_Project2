@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", function () {
     function getData(){
         toggleControls("on");
         if(localStorage.length === 0){
-            alert("There is no date in local storage!");
+            alert("There are no workouts stored!");
         }
         //Write Data from Local Storage to the Browser.
         var makeDiv = document.createElement("div");
@@ -111,7 +111,7 @@ window.addEventListener("DOMContentLoaded", function () {
     
     function clearLocal() {
         if(localStorage.length === 0) {
-            alert("There is no date to clear.")
+            alert("There are no workouts to clear.")
         }else{
             localStorage.clear();
             alert("Workouts have been cleared!");
